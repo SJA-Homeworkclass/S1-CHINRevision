@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中一中文互動溫習樂園 🌟</title>
+<style>
+  :root {
+    --bg-cream: #FFFDF5;
+    --card-white: #FFFFFF;
+    --primary-blue: #4A90E2;
+    --primary-yellow: #FFD166;
+    --primary-green: #06D6A0;
+    --primary-pink: #EF476F;
+    --primary-purple: #8338EC;
+    --text-dark: #2B2D42;
+    --text-muted: #5C677D;
+    --border-soft: #E2E8F0;
+  }
+
+  * {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    font-family: "PingFang HK", "Microsoft JhengHei", "Heiti TC", sans-serif;
+    font-size: 20px;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+  }
+
+  /* 頂部導航與獎勵欄 */
+  header {
+    background: linear-gradient(135deg, #FFD166 0%, #FF9F1C 100%);
+    padding: 14px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-bottom: 4px solid #F77F00;
+  }
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 25px;
+    font-weight: 800;
+    color: #2B2D42;
+  }
+
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .voice-control-pill {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2B2D42;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  }
+
+  .voice-control-pill input[type="range"] {
+    width: 90px;
+    accent-color: #4A90E2;
+    cursor: pointer;
+  }
+
+  .star-badge {
+    background: #FFFFFF;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 21px;
+    color: #F77F00;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 關卡選擇按鈕列 */
+  .nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 16px 10px;
+    flex-wrap: wrap;
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+
+  .tab-btn {
+    border: 3px solid transparent;
+    background: #FFFFFF;
+    color: var(--text-dark);
+    font-size: 19px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tab-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .tab-btn.active {
+    background: var(--primary-blue);
+    color: #FFFFFF;
+    border-color: #2B6CB0;
+    box-shadow: 0 6px 14px rgba(74, 144, 226, 0.35);
+  }
+
+  /* 主內容區 */
+  main {
+    max-width: 1100px;
+    margin: 16px auto 50px;
+    padding: 0 16px;
+  }
+
+  .section-panel {
+    display: none;
+    background: var(--card-white);
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border: 3px solid #EDF2F7;
+  }
+
+  .section-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 3px dashed #E2E8F0;
+  }
+
+  .panel-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 0;
+    color: var(--text-dark);
+  }
+
+  /* 通用按鈕 */
+  .btn {
+    border: none;
+    border-radius: 16px;
+    padding: 10px 18px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+  }
+
+  .btn:active {
+    transform: scale(0.96);
+  }
+
+  .btn-audio {
+    background: #EBF8FF;
+    color: #2B6CB0;
+    border: 2px solid #BEE3F8;
+  }
+
+  .btn-audio:hover {
+    background: #BEE3F8;
+  }
+
+  .btn-primary {
+    background: var(--primary-blue);
+    color: white;
+    box-shadow: 0 4px 0 #2B6CB0;
+  }
+
+  .btn-success {
+    background: var(--primary-green);
+    color: #073B4C;
+    box-shadow: 0 4px 0 #05A87D;
+  }
+
+  .btn-danger {
+    background: var(--primary-pink);
+    color: white;
+    box-shadow: 0 4px 0 #C9184A;
+  }
+
+  .btn-warning {
+    background: var(--primary-yellow);
+    color: #2B2D42;
+    box-shadow: 0 4px 0 #E09F3E;
+  }
+
+  .btn-purple {
+    background: var(--primary-purple);
+    color: white;
+    box-shadow: 0 4px 0 #5A189A;
+  }
+
+  /* ==================== 關卡一：閃卡 ==================== */
+  .flashcard-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .flashcard-Scene {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 680px;
+    height: 360px;
+    margin: 0 auto 24px;
+    cursor: pointer;
+  }
+
+  .flashcard-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .flashcard-inner.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 26px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  .flashcard-front {
+    background: #FFF9DB;
+    border: 4px solid #FFD166;
+  }
+
+  .flashcard-back {
+    background: #E6FFFA;
+    border: 4px solid #06D6A0;
+    transform: rotateY(180deg);
+  }
+
+  .card-tag {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    background: #FFFFFF;
+    padding: 4px 14px;
+    border-radius: 99px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #5C677D;
+    border: 2px solid #E2E8F0;
+  }
+
+  .card-word {
+    font-size: 52px;
+    font-weight: 900;
+    color: #D90429;
+    margin: 8px 0 12px;
+    background: #FFFFFF;
+    padding: 4px 28px;
+    border-radius: 20px;
+    border: 3px solid #FFCAD4;
+  }
+
+  .card-sentence {
+    font-size: 24px;
+    color: #2B2D42;
+    margin-bottom: 14px;
+  }
+
+  .highlight-word {
+    color: #D90429;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .card-meaning {
+    font-size: 40px;
+    font-weight: 900;
+    color: #073B4C;
+    background: #FFFFFF;
+    padding: 8px 28px;
+    border-radius: 18px;
+    border: 3px solid #06D6A0;
+    margin-bottom: 14px;
+  }
+
+  .card-mnemonic {
+    font-size: 22px;
+    background: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 16px;
+    color: #2B2D42;
+    max-width: 90%;
+  }
+
+  .flip-hint {
+    position: absolute;
+    bottom: 12px;
+    font-size: 16px;
+    color: #718096;
+  }
+
+  .flashcard-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ==================== 關卡二：是非題（28題隨機大題庫） ==================== */
+  .quiz-box {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #F8FAFC;
+    border-radius: 24px;
+    padding: 28px;
+    border: 3px solid #E2E8F0;
+    text-align: center;
+  }
+
+  .quiz-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .quiz-progress {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--primary-blue);
+    background: #EBF8FF;
+    padding: 6px 16px;
+    border-radius: 99px;
+  }
+
+  .quiz-cat-badge {
+    font-size: 17px;
+    font-weight: 800;
+    color: #5A189A;
+    background: #F3E8FF;
+    padding: 6px 16px;
+    border-radius: 99px;
+    border: 2px solid #D8B4FE;
+  }
+
+  .quiz-question {
+    font-size: 25px;
+    font-weight: 800;
+    margin: 16px 0 26px;
+    line-height: 1.65;
+    background: #FFFFFF;
+    padding: 24px;
+    border-radius: 20px;
+    border: 2px solid #CBD5E0;
+    text-align: left;
+  }
+
+  .tf-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 20px;
+  }
+
+  .tf-btn {
+    width: 175px;
+    height: 110px;
+    font-size: 26px;
+    font-weight: 900;
+    border-radius: 24px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: transform 0.15s, opacity 0.2s;
+  }
+
+  .tf-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  .tf-btn.true-btn {
+    background: #D8F3DC;
+    color: #1B4332;
+    border: 4px solid #40916C;
+  }
+
+  .tf-btn.false-btn {
+    background: #FFE5EC;
+    color: #800F2F;
+    border: 4px solid #FF4D6D;
+  }
+
+  .tf-btn:hover:not(:disabled) {
+    transform: scale(1.04);
+  }
+
+  .quiz-feedback {
+    display: none;
+    margin-top: 18px;
+    padding: 20px;
+    border-radius: 18px;
+    font-size: 21px;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  /* ==================== 關卡三：連線配對 ==================== */
+  .match-theme-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .match-sub-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #F8FAFC;
+    padding: 12px 18px;
+    border-radius: 18px;
+    border: 2px solid #E2E8F0;
+    margin-bottom: 18px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .match-board {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 44px;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+
+  .match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 44%;
+    z-index: 2;
+  }
+
+  .match-item {
+    background: #FFFFFF;
+    border: 3px solid #CBD5E0;
+    border-radius: 16px;
+    padding: 12px 16px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  }
+
+  .match-item-text {
+    flex: 1;
+    text-align: center;
+  }
+
+  .mini-audio-btn {
+    background: #EBF8FF;
+    border: 2px solid #BEE3F8;
+    color: #2B6CB0;
+    border-radius: 10px;
+    padding: 4px 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+  }
+
+  .mini-audio-btn:hover {
+    background: #BEE3F8;
+  }
+
+  .match-item.selected {
+    border-color: var(--primary-blue);
+    background: #EBF8FF;
+    transform: scale(1.02);
+  }
+
+  .match-item.matched {
+    border-color: var(--primary-green);
+    background: #D8F3DC;
+    color: #1B4332;
+    cursor: default;
+  }
+
+  .match-item.wrong {
+    border-color: var(--primary-pink);
+    background: #FFE5EC;
+    animation: shake 0.35s;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  #match-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ==================== 關卡四：《岳飛之少年時代》段意與主旨 ==================== */
+  .yuefei-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .word-bank-box {
+    background: #FFF9DB;
+    border: 3px solid #FFD166;
+    border-radius: 22px;
+    padding: 18px 22px;
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+
+  .word-bank-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #9C4221;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .bank-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .bank-chip {
+    background: #FFFFFF;
+    border: 3px solid #F77F00;
+    color: #2B2D42;
+    padding: 8px 16px;
+    border-radius: 14px;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .bank-chip.selected {
+    background: #F77F00;
+    color: #FFFFFF;
+    transform: scale(1.06);
+  }
+
+  .bank-chip.used {
+    opacity: 0.35;
+    background: #CBD5E0;
+    border-color: #A0AEC0;
+    cursor: default;
+  }
+
+  .yuefei-table {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .yuefei-row {
+    display: flex;
+    background: #F8FAFC;
+    border: 3px solid #CBD5E0;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .yuefei-label {
+    background: #EBF8FF;
+    color: #2B6CB0;
+    font-weight: 900;
+    font-size: 22px;
+    width: 130px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-right: 3px solid #CBD5E0;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .yuefei-content {
+    padding: 20px 24px;
+    font-size: 22px;
+    line-height: 2.1;
+    flex: 1;
+  }
+
+  .yuefei-main-idea {
+    background: #F3E8FF;
+    border: 3px solid #8338EC;
+  }
+
+  .yuefei-main-idea .yuefei-label {
+    background: #8338EC;
+    color: #FFFFFF;
+    border-right-color: #8338EC;
+  }
+
+  .blank-slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 155px;
+    height: 46px;
+    padding: 0 14px;
+    margin: 0 6px;
+    border-bottom: 4px solid var(--primary-blue);
+    background: #FFFFFF;
+    border-radius: 12px;
+    font-weight: 900;
+    color: var(--primary-blue);
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all 0.2s;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+  }
+
+  .blank-slot.active-slot {
+    background: #EBF8FF;
+    border: 3px dashed #2B6CB0;
+    transform: scale(1.04);
+  }
+
+  .blank-slot.correct {
+    background: #D8F3DC;
+    border-color: #40916C;
+    color: #1B4332;
+  }
+
+  .blank-slot.wrong {
+    background: #FFE5EC;
+    border-color: #FF4D6D;
+    color: #800F2F;
+    animation: shake 0.35s;
+  }
+
+  /* ==================== 關卡五：手寫描紅畫板（10詞獨立語音＋細筆＋大字體） ==================== */
+  .trace-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .word-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 960px;
+  }
+
+  .trace-card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 16px;
+    border: 3px solid #CBD5E0;
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.15s;
+    gap: 6px;
+  }
+
+  .trace-card-item:hover {
+    border-color: var(--primary-blue);
+  }
+
+  .trace-card-item.active {
+    background: #F3E8FF;
+    border-color: var(--primary-purple);
+    box-shadow: 0 4px 10px rgba(131, 56, 236, 0.2);
+  }
+
+  .trace-card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-dark);
+    flex: 1;
+    text-align: left;
+  }
+
+  .trace-card-audios {
+    display: flex;
+    gap: 4px;
+  }
+
+  .trace-voice-pill {
+    background: #EBF8FF;
+    border: 2px solid #90CDF4;
+    color: #2B6CB0;
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .trace-voice-pill.meaning-pill {
+    background: #E6FFFA;
+    border-color: #81E6D9;
+    color: #073B4C;
+  }
+
+  .trace-voice-pill:hover {
+    transform: scale(1.06);
+  }
+
+  .trace-info-bar {
+    background: #FFF9DB;
+    border: 3px solid #FFD166;
+    border-radius: 20px;
+    padding: 14px 22px;
+    width: 100%;
+    max-width: 880px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .trace-info-text {
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  .trace-info-audio-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .trace-mode-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 880px;
+    height: 350px;
+    background: #FFFFFF;
+    border: 4px solid var(--primary-blue);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.05);
+    touch-action: none;
+  }
+
+  #trace-canvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+  }
+
+  .canvas-tools {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: #F8FAFC;
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: 2px solid #E2E8F0;
+    width: 100%;
+    max-width: 880px;
+  }
+
+  .color-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    cursor: pointer;
+  }
+
+  .color-dot.active {
+    transform: scale(1.22);
+    border-color: #2B2D42;
+  }
+
+  .size-btn {
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 2px solid #CBD5E0;
+    background: #FFFFFF;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .size-btn.active {
+    background: var(--primary-blue);
+    color: #FFFFFF;
+    border-color: #2B6CB0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <span>🦁</span>
+    <span>中一中文第一學期考試：互動溫習樂園</span>
+  </div>
+  <div class="header-controls">
+    <div class="voice-control-pill" title="可隨時調整粵語女聲朗讀速度">
+      <span>👩‍🏫 溫柔粵語女聲語速：</span>
+      <input type="range" id="speech-rate-slider" min="0.55" max="0.95" step="0.05" value="0.75" oninput="updateSpeechRate(this.value)">
+      <span id="speech-rate-label">0.75x (慢速清晰)</span>
+    </div>
+    <div class="star-badge">
+      <span>⭐ 獎勵星星：</span>
+      <span id="star-count">0</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="tab-btn active" onclick="switchTab('flashcard', this)">🎴 1. 字詞閃卡</button>
+  <button class="tab-btn" onclick="switchTab('quiz', this)">⭕❌ 2. 課文是非題 (28題庫)</button>
+  <button class="tab-btn" onclick="switchTab('match', this)">🔗 3. 配對連線</button>
+  <button class="tab-btn" onclick="switchTab('yuefei', this)">🏹 4. 《岳飛》段意與主旨</button>
+  <button class="tab-btn" onclick="switchTab('trace', this)">✍️ 5. 聽音描紅與畫板 (10詞)</button>
+</nav>
+
+<main>
+  <!-- ==================== 1. 閃卡區 ==================== -->
+  <section id="panel-flashcard" class="section-panel active">
+    <div class="panel-header">
+      <h2 class="panel-title">🎴 文言字詞語譯閃卡（點擊卡片翻面）</h2>
+      <div class="flashcard-controls">
+        <button class="btn btn-warning" onclick="filterCards('all')">全部字詞 (10)</button>
+        <button class="btn btn-danger" onclick="filterCards('retry')">🔴 待溫習區 (<span id="retry-count">0</span>)</button>
+        <button class="btn btn-audio" onclick="speakCurrentCard()">🔊 粵語女聲朗讀</button>
+      </div>
+    </div>
+
+    <div class="flashcard-Scene" onclick="flipCard()">
+      <div id="flashcard-inner" class="flashcard-inner">
+        <!-- 正面 -->
+        <div class="flashcard-face flashcard-front">
+          <span id="fc-lesson" class="card-tag">《楊修之死》</span>
+          <div id="fc-word" class="card-word">不日</div>
+          <div id="fc-sentence" class="card-sentence">便知魏王<span class="highlight-word">不日</span>將退兵歸也。</div>
+          <span class="flip-hint">👆 點擊卡片查看答案與記憶口訣</span>
+        </div>
+        <!-- 背面 -->
+        <div class="flashcard-face flashcard-back">
+          <span class="card-tag">🎯 考試標準語譯</span>
+          <div id="fc-meaning" class="card-meaning">未來數天之內</div>
+          <div id="fc-mnemonic" class="card-mnemonic">📅 <b>拆字口訣</b>：「不」用等很多「日」（天）＝ 未來幾天內！</div>
+          <span class="flip-hint">👆 點擊翻回正面</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard-actions">
+      <button class="btn btn-primary" onclick="prevCard()">⬅️ 上一張</button>
+      <button class="btn btn-danger" onclick="markCardRetry()">🔴 放入「再溫一次」</button>
+      <button class="btn btn-success" onclick="markCardKnown()">🟢 我識得啦！（+1⭐）</button>
+      <button class="btn btn-primary" onclick="nextCard()">下一張 ➡️</button>
+    </div>
+  </section>
+
+  <!-- ==================== 2. 是非題區（28題隨機大題庫） ==================== -->
+  <section id="panel-quiz" class="section-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">⭕❌ 課文重點是非題大挑戰（共 28 題隨機題庫）</h2>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-warning" onclick="startRandomQuizRound(10)">🎲 隨機抽 10 題新回合</button>
+        <button class="btn btn-purple" onclick="startRandomQuizRound(28)">📚 挑戰全部 28 題</button>
+        <button class="btn btn-audio" onclick="speakQuiz()">🔊 朗讀題目</button>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-meta-bar">
+        <div id="quiz-progress" class="quiz-progress">第 1 / 10 題</div>
+        <div id="quiz-cat" class="quiz-cat-badge">《楊修之死》</div>
+      </div>
+
+      <div id="quiz-question" class="quiz-question"></div>
+
+      <div class="tf-buttons">
+        <button id="btn-true" class="tf-btn true-btn" onclick="answerQuiz(true)">
+          <span>⭕</span>
+          <span>正確</span>
+        </button>
+        <button id="btn-false" class="tf-btn false-btn" onclick="answerQuiz(false)">
+          <span>❌</span>
+          <span>錯誤</span>
+        </button>
+      </div>
+
+      <div id="quiz-feedback" class="quiz-feedback"></div>
+      <div style="margin-top: 18px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <button id="speak-explain-btn" class="btn btn-audio" style="display:none;" onclick="speakQuizExplanation()">🔊 聽取原因解釋</button>
+        <button id="next-quiz-btn" class="btn btn-primary" style="display:none;" onclick="nextQuiz()">下一題 ➡️</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. 連線配對區 ==================== -->
+  <section id="panel-match" class="section-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">🔗 點擊左右方格進行連線配對</h2>
+      <div class="match-theme-bar">
+        <button class="btn btn-warning" onclick="loadMatchGame(0)">主題一：字詞語譯 (全10詞)</button>
+        <button class="btn btn-primary" onclick="loadMatchGame(1)">主題二：楊修事件與結果</button>
+        <button class="btn btn-success" onclick="loadMatchGame(2)">主題三：《歪兒》記敍與情感</button>
+      </div>
+    </div>
+
+    <div class="match-sub-controls">
+      <div id="match-theme-label" style="font-weight:800; color:#2B6CB0;">📌 當前主題：主題一（全部 10 個必考字詞語譯）</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-purple" onclick="refreshCurrentMatch()">🎲 隨機刷新題目順序</button>
+        <button class="btn btn-audio" onclick="speakAllMatchPairs()">🔊 粵語朗讀本頁全部答案</button>
+      </div>
+    </div>
+
+    <div id="match-board" class="match-board">
+      <svg id="match-svg"></svg>
+      <div id="match-left" class="match-col"></div>
+      <div id="match-right" class="match-col"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. 《岳飛之少年時代》段意與主旨 ==================== -->
+  <section id="panel-yuefei" class="section-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">🏹 《岳飛之少年時代》段落段意及主旨溫習</h2>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-warning" onclick="resetYuefei(false)">🔄 重新填充挑戰</button>
+        <button class="btn btn-success" onclick="showAllYuefeiAnswers()">👁️ 顯示全部標準答案</button>
+        <button class="btn btn-audio" onclick="speakYuefeiAll()">🔊 粵語朗讀全文段意與主旨</button>
+      </div>
+    </div>
+
+    <div class="yuefei-container">
+      <!-- 詞語庫 -->
+      <div class="word-bank-box">
+        <div class="word-bank-title">
+          <span>👇 步驟 1：先點擊下方「空格」，再點擊這裡的「詞語卡」填入答案！（點擊詞語會自動發音）</span>
+        </div>
+        <div id="yuefei-bank" class="bank-chips"></div>
+      </div>
+
+      <!-- 段落表格 -->
+      <div class="yuefei-table">
+        <!-- 第一段 -->
+        <div class="yuefei-row">
+          <div class="yuefei-label">
+            <span>第 1 段</span>
+            <button class="mini-audio-btn" onclick="speakYuefeiPara(1)">🔊 朗讀</button>
+          </div>
+          <div class="yuefei-content">
+            記敍岳飛的表字和籍貫、<span class="blank-slot" data-ans="名字的由來" onclick="selectSlot(this)">（點擊選擇）</span>，以及初生時遇上<span class="blank-slot" data-ans="洪水" onclick="selectSlot(this)">（點擊選擇）</span>而<span class="blank-slot" data-ans="大難不死" onclick="selectSlot(this)">（點擊選擇）</span>的經歷。
+          </div>
+        </div>
+
+        <!-- 第二段 -->
+        <div class="yuefei-row">
+          <div class="yuefei-label">
+            <span>第 2 段</span>
+            <button class="mini-audio-btn" onclick="speakYuefeiPara(2)">🔊 朗讀</button>
+          </div>
+          <div class="yuefei-content">
+            以岳飛<span class="blank-slot" data-ans="記憶書傳內容" onclick="selectSlot(this)">（點擊選擇）</span>的能力很強、<span class="blank-slot" data-ans="通宵達旦地讀書" onclick="selectSlot(this)">（點擊選擇）</span>和努力學習周同的箭術，表達他少負氣節、天資非凡和<span class="blank-slot" data-ans="勤奮好學" onclick="selectSlot(this)">（點擊選擇）</span>的特點。
+          </div>
+        </div>
+
+        <!-- 第三段 -->
+        <div class="yuefei-row">
+          <div class="yuefei-label">
+            <span>第 3 段</span>
+            <button class="mini-audio-btn" onclick="speakYuefeiPara(3)">🔊 朗讀</button>
+          </div>
+          <div class="yuefei-content">
+            記敍岳飛<span class="blank-slot" data-ans="不忘師恩" onclick="selectSlot(this)">（點擊選擇）</span>的美德，並通過父親與他的對話表達岳飛<span class="blank-slot" data-ans="以身報國" onclick="selectSlot(this)">（點擊選擇）</span>的志向。
+          </div>
+        </div>
+
+        <!-- 主旨 -->
+        <div class="yuefei-row yuefei-main-idea">
+          <div class="yuefei-label">
+            <span>🌟 主旨</span>
+            <button class="mini-audio-btn" onclick="speakYuefeiPara(4)">🔊 朗讀</button>
+          </div>
+          <div class="yuefei-content">
+            本文通過記敍岳飛少年時<b>力學</b>、<b>敬師</b>和<b>述志</b>的事跡，表現岳飛<span class="blank-slot" data-ans="刻苦學習的精神" onclick="selectSlot(this)">（點擊選擇）</span>、<span class="blank-slot" data-ans="尊師重道的態度" onclick="selectSlot(this)">（點擊選擇）</span>和<span class="blank-slot" data-ans="報效國家的志向" onclick="selectSlot(this)">（點擊選擇）</span>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. 描紅與畫板區 (10個詞語獨立發音＋細畫筆＋大語譯字體) ==================== -->
+  <section id="panel-trace" class="section-panel">
+    <div class="panel-header">
+      <h2 class="panel-title">✍️ 10 個必考字詞與語譯：聽音默寫及描紅畫板</h2>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-audio" onclick="speakCurrentTraceWordOnly()">🔊 讀「文言字詞」</button>
+        <button class="btn btn-audio" onclick="speakCurrentTraceMeaningOnly()">🔊 讀「考試語譯」</button>
+        <button class="btn btn-audio" onclick="speakTraceWord()">🔊 完整朗讀</button>
+      </div>
+    </div>
+
+    <div class="trace-layout">
+      <!-- 10個詞語選擇器，每個均附「讀字詞」及「讀語譯」按鈕 -->
+      <div id="word-selector" class="word-selector-grid"></div>
+
+      <!-- 當前詞語資訊列與獨立發音按鈕 -->
+      <div class="trace-info-bar">
+        <div id="trace-info" class="trace-info-text"></div>
+        <div class="trace-info-audio-btns">
+          <button class="btn btn-audio" style="padding:6px 14px; font-size:17px;" onclick="speakCurrentTraceWordOnly()">🔊 聽字詞寫字</button>
+          <button class="btn btn-audio" style="padding:6px 14px; font-size:17px;" onclick="speakCurrentTraceMeaningOnly()">🔊 聽語譯默寫</button>
+        </div>
+      </div>
+
+      <div class="trace-mode-bar">
+        <button id="mode-word-btn" class="btn btn-primary" onclick="setTraceContentMode('word')">📝 描寫「文言字詞」</button>
+        <button id="mode-meaning-btn" class="btn btn-warning" onclick="setTraceContentMode('meaning')">🎯 描寫「考試語譯答案」(大字版)</button>
+        <button class="btn btn-purple" onclick="toggleTraceTemplate()">👁️ 顯示 / 隱藏底字（聽音默寫）</button>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="trace-canvas" width="880" height="350"></canvas>
+      </div>
+
+      <div class="canvas-tools">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:800; font-size:18px;">✏️ 畫筆粗細：</span>
+          <button class="size-btn" onclick="setPenSize(2.5, this)">極幼 (2.5px)</button>
+          <button class="size-btn active" onclick="setPenSize(4, this)">幼筆描紅 (4px)</button>
+          <button class="size-btn" onclick="setPenSize(6, this)">適中 (6px)</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-weight:800; font-size:18px;">🎨 顏色：</span>
+          <div class="color-dot active" style="background:#D90429;" onclick="setPenColor('#D90429', this)"></div>
+          <div class="color-dot" style="background:#1D3557;" onclick="setPenColor('#1D3557', this)"></div>
+          <div class="color-dot" style="background:#2A9D8F;" onclick="setPenColor('#2A9D8F', this)"></div>
+          <div class="color-dot" style="background:#8338EC;" onclick="setPenColor('#8338EC', this)"></div>
+        </div>
+
+        <button class="btn btn-danger" onclick="clearCanvas()">🗑️ 清除重寫</button>
+        <button class="btn btn-success" onclick="completeTrace()">✨ 完成練習（+1⭐）</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // ==================== 全局星星與溫柔粵語女聲 (TTS) 系統 ====================
+  let stars = 0;
+  let globalSpeechRate = 0.75; // 預設更慢、更清晰的語速 (0.75x)
+  let preferredCantoneseVoice = null;
+
+  function addStar(amount = 1) {
+    stars += amount;
+    document.getElementById('star-count').innerText = stars;
+  }
+
+  function updateSpeechRate(val) {
+    globalSpeechRate = parseFloat(val);
+    document.getElementById('speech-rate-label').innerText = `${globalSpeechRate.toFixed(2)}x`;
+  }
+
+  // 智能挑選最自然、柔和的粵語女聲（過濾男聲及生硬語音）
+  function selectSoftCantoneseFemaleVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return null;
+
+    // 篩選所有粵語 / 香港中文語音
+    const hkVoices = voices.filter(v =>
+      v.lang.toLowerCase().includes('zh-hk') ||
+      v.lang.toLowerCase().includes('yue') ||
+      v.name.includes('Hong Kong') ||
+      v.name.includes('Cantonese') ||
+      v.name.includes('粵語') ||
+      v.name.includes('廣東話')
+    );
+
+    if (hkVoices.length === 0) return null;
+
+    // 優先級清單：微軟 Natural 神經網絡女聲 (HiuGaai / HiuMaan)、Apple 高音質女聲 (Sin-ji / Sinji Premium/Enhanced)、Google 粵語女聲
+    // 同時排除男聲 (WanLung / Danny / Male)
+    const femaleCandidates = hkVoices.filter(v =>
+      !v.name.toLowerCase().includes('wanlung') &&
+      !v.name.toLowerCase().includes('male') &&
+      !v.name.toLowerCase().includes('danny')
+    );
+
+    const pool = femaleCandidates.length > 0 ? femaleCandidates : hkVoices;
+
+    const priorityKeywords = [
+      'HiuGaai',       // Microsoft 最自然溫柔粵語女聲
+      'HiuMaan',       // Microsoft 自然粵語女聲
+      'Natural',       // Neural 自然語音
+      'Premium',       // Apple 高品質語音
+      'Enhanced',      // Apple 增強版語音
+      'Sin-ji',        // iOS / macOS 粵語女聲
+      'Sinji',
+      'Google 粵語'
+    ];
+
+    for (const kw of priorityKeywords) {
+      const matched = pool.find(v => v.name.toLowerCase().includes(kw.toLowerCase()));
+      if (matched) return matched;
+    }
+
+    return pool[0];
+  }
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      preferredCantoneseVoice = selectSoftCantoneseFemaleVoice();
+    };
+  }
+
+  // 溫柔慢速粵語朗讀（加入標點呼吸停頓與語氣詞處理，減低 AI 機械感）
+  function speakText(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+
+    if (!preferredCantoneseVoice) {
+      preferredCantoneseVoice = selectSoftCantoneseFemaleVoice();
+    }
+
+    // 將斜線、冒號轉化為自然停頓，讓讀音更柔和流暢
+    const naturalText = text
+      .replace(/／/g, '，或者係，')
+      .replace(/\//g, '，或者係，')
+      .replace(/：/g, '，')
+      .replace(/:/g, '，')
+      .replace(/【/g, '，')
+      .replace(/】/g, '，');
+
+    const utter = new SpeechSynthesisUtterance(naturalText);
+    if (preferredCantoneseVoice) {
+      utter.voice = preferredCantoneseVoice;
+    }
+    utter.lang = 'zh-HK';
+    utter.rate = globalSpeechRate; // 預設 0.75 慢速清晰
+    utter.pitch = 1.05;            // 略微柔和溫暖的女聲聲線
+    utter.volume = 1.0;
+
+    window.speechSynthesis.speak(utter);
+  }
+
+  function switchTab(tabId, btnEl) {
+    document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tabId).classList.add('active');
+    btnEl.classList.add('active');
+    if (tabId === 'match') {
+      setTimeout(drawMatchedLines, 50);
+    }
+    if (tabId === 'trace') {
+      setTimeout(initCanvas, 50);
+    }
+  }
+
+  // ==================== 1. 閃卡資料與邏輯 ====================
+  const allFlashcards = [
+    {
+      lesson: "《楊修之死》",
+      word: "不日",
+      sentence: "便知魏王<span class='highlight-word'>不日</span>將退兵歸也。",
+      plainSentence: "便知魏王不日將退兵歸也。",
+      meaning: "未來數天之內",
+      mnemonic: "📅 <b>拆字口訣</b>：「不」用等很多「日」（天）＝ <b>未來數天之內</b>"
+    },
+    {
+      lesson: "《楊修之死》",
+      word: "班師",
+      sentence: "來日魏王必<span class='highlight-word'>班師</span>矣。",
+      plainSentence: "來日魏王必班師矣。",
+      meaning: "調回出征軍隊",
+      mnemonic: "🏳️ <b>拆字口訣</b>：軍隊（師）下「班」回家了 ＝ <b>調回出征軍隊</b>"
+    },
+    {
+      lesson: "《楊修之死》",
+      word: "放曠",
+      sentence: "原來楊修為人，恃才<span class='highlight-word'>放曠</span>。",
+      plainSentence: "原來楊修為人，恃才放曠。",
+      meaning: "放恣／不守法度",
+      mnemonic: "🤪 <b>拆字口訣</b>：「放」縱自己，行為太狂「曠」＝ <b>放恣／不守法度</b>"
+    },
+    {
+      lesson: "《楊修之死》",
+      word: "數",
+      sentence: "<span class='highlight-word'>數</span>犯曹操之忌。",
+      plainSentence: "數犯曹操之忌。",
+      meaning: "屢次",
+      mnemonic: "🔢 <b>動作口訣</b>：犯錯多到要「數」手指 ＝ <b>屢次</b>"
+    },
+    {
+      lesson: "《楊修之死》",
+      word: "肺腑",
+      sentence: "公真知魏王<span class='highlight-word'>肺腑</span>也。",
+      plainSentence: "公真知魏王肺腑也。",
+      meaning: "心思",
+      mnemonic: "🫀 <b>部首口訣</b>：月字旁代表內臟，心肝肺腑藏著人的想法 ＝ <b>心思</b>"
+    },
+    {
+      lesson: "《岳飛之少年時代》",
+      word: "彌月",
+      sentence: "未<span class='highlight-word'>彌月</span>。",
+      plainSentence: "未彌月。",
+      meaning: "出生滿一月",
+      mnemonic: "👶 <b>生活聯想</b>：BB 擺滿月酒又叫「彌月之喜」＝ <b>出生滿一月</b>"
+    },
+    {
+      lesson: "《岳飛之少年時代》",
+      word: "及",
+      sentence: "<span class='highlight-word'>及</span>岸，得不死。",
+      plainSentence: "及岸，得不死。",
+      meaning: "到達",
+      mnemonic: "🏊 <b>畫面聯想</b>：洪水漂流，終於觸「及」岸邊 ＝ <b>到達</b>"
+    },
+    {
+      lesson: "《岳飛之少年時代》",
+      word: "好",
+      sentence: "尤<span class='highlight-word'>好</span>《左氏春秋》及孫吳兵法。",
+      plainSentence: "尤好左氏春秋及孫吳兵法。",
+      meaning: "愛好",
+      mnemonic: "❤️ <b>讀音聯想</b>：讀去聲（好學、喜好）＝ <b>愛好</b>"
+    },
+    {
+      lesson: "《岳飛之少年時代》",
+      word: "冠",
+      sentence: "未<span class='highlight-word'>冠</span>。",
+      plainSentence: "未冠。",
+      meaning: "二十歲",
+      mnemonic: "👑 <b>文化聯想</b>：古代男子滿 20 歲戴帽子（冠）行成年禮 ＝ <b>二十歲</b>"
+    },
+    {
+      lesson: "《岳飛之少年時代》",
+      word: "挽",
+      sentence: "能<span class='highlight-word'>挽</span>弓三百斤。",
+      plainSentence: "能挽弓三百斤。",
+      meaning: "拉開",
+      mnemonic: "🏹 <b>部首動作</b>：提手旁（扌），雙手用力「拉開」弓箭 ＝ <b>拉開</b>"
+    }
+  ];
+
+  let activeCards = [...allFlashcards];
+  let retryCards = [];
+  let currentCardIdx = 0;
+
+  function renderFlashcard() {
+    const cardEl = document.getElementById('flashcard-inner');
+    cardEl.classList.remove('is-flipped');
+    const item = activeCards[currentCardIdx];
+    document.getElementById('fc-lesson').innerText = `${item.lesson} (${currentCardIdx + 1}/${activeCards.length})`;
+    document.getElementById('fc-word').innerText = item.word;
+    document.getElementById('fc-sentence').innerHTML = item.sentence;
+    document.getElementById('fc-meaning').innerText = item.meaning;
+    document.getElementById('fc-mnemonic').innerHTML = item.mnemonic;
+  }
+
+  function flipCard() {
+    document.getElementById('flashcard-inner').classList.toggle('is-flipped');
+  }
+
+  function nextCard() {
+    currentCardIdx = (currentCardIdx + 1) % activeCards.length;
+    renderFlashcard();
+  }
+
+  function prevCard() {
+    currentCardIdx = (currentCardIdx - 1 + activeCards.length) % activeCards.length;
+    renderFlashcard();
+  }
+
+  function markCardKnown() {
+    addStar(1);
+    const curr = activeCards[currentCardIdx];
+    retryCards = retryCards.filter(c => c.word !== curr.word);
+    document.getElementById('retry-count').innerText = retryCards.length;
+    nextCard();
+  }
+
+  function markCardRetry() {
+    const curr = activeCards[currentCardIdx];
+    if (!retryCards.some(c => c.word === curr.word)) {
+      retryCards.push(curr);
+      document.getElementById('retry-count').innerText = retryCards.length;
+    }
+    nextCard();
+  }
+
+  function filterCards(mode) {
+    if (mode === 'retry') {
+      if (retryCards.length === 0) {
+        alert('🎉 太棒了！目前「待溫習區」沒有字詞！');
+        return;
+      }
+      activeCards = [...retryCards];
+    } else {
+      activeCards = [...allFlashcards];
+    }
+    currentCardIdx = 0;
+    renderFlashcard();
+  }
+
+  function speakCurrentCard() {
+    const item = activeCards[currentCardIdx];
+    speakText(`${item.word}，課文例句係，${item.plainSentence}，意思係，${item.meaning}。`);
+  }
+
+  // ==================== 2. 是非題 28 題大題庫與隨機抽題邏輯 ====================
+  const masterQuizPool = [
+    // --- 字詞語譯題 (1-10) ---
+    {
+      cat: "字詞語譯：《楊修之死》",
+      q: "「便知魏王不日將退兵歸也」中的「不日」，語譯是「未來數天之內」。",
+      ans: true,
+      reason: "這句是【正確】的！「不日」即不用等很多天，標準語譯是「未來數天之內」。"
+    },
+    {
+      cat: "字詞語譯：《楊修之死》",
+      q: "「來日魏王必班師矣」中的「班師」，語譯是「派出軍隊去打仗」。",
+      ans: false,
+      reason: "這句是【錯誤】的！「班師」的標準語譯是「調回出征軍隊」（退兵回朝），而不是派出軍隊去打仗。"
+    },
+    {
+      cat: "字詞語譯：《楊修之死》",
+      q: "「原來楊修為人，恃才放曠」中的「放曠」，語譯是「放恣」或「不守法度」。",
+      ans: true,
+      reason: "這句是【正確】的！「放曠」形容楊修依仗才華而行為放縱，標準語譯是「放恣／不守法度」。"
+    },
+    {
+      cat: "字詞語譯：《楊修之死》",
+      q: "「數犯曹操之忌」中的「數」，在課文中的意思是「計算數字」。",
+      ans: false,
+      reason: "這句是【錯誤】的！「數」在這裡讀作 sou3（粵音），意思是「屢次」（多次觸犯曹操的忌諱），而不是計算數字。"
+    },
+    {
+      cat: "字詞語譯：《楊修之死》",
+      q: "「公真知魏王肺腑也」中的「肺腑」，在課文中的語譯是「心思」。",
+      ans: true,
+      reason: "這句是【正確】的！「肺腑」比喻人內心深處的想法，標準語譯是「心思」。"
+    },
+    {
+      cat: "字詞語譯：《岳飛之少年時代》",
+      q: "《岳飛之少年時代》中「未彌月」的「彌月」，語譯是「出生滿一年」。",
+      ans: false,
+      reason: "這句是【錯誤】的！「彌月」是指嬰兒「出生滿一月」（滿月），而不是滿一年。"
+    },
+    {
+      cat: "字詞語譯：《岳飛之少年時代》",
+      q: "「及岸，得不死」中的「及」，標準語譯是「到達」。",
+      ans: true,
+      reason: "這句是【正確】的！「及岸」就是漂流「到達」岸邊，因此「及」的語譯是「到達」。"
+    },
+    {
+      cat: "字詞語譯：《岳飛之少年時代》",
+      q: "「尤好《左氏春秋》及孫吳兵法」中的「好」，語譯是「愛好」。",
+      ans: true,
+      reason: "這句是【正確】的！「尤好」就是特別喜愛，所以「好」的標準語譯是「愛好」。"
+    },
+    {
+      cat: "字詞語譯：《岳飛之少年時代》",
+      q: "「未冠」中的「冠」，在課文中是指男子「三十歲」。",
+      ans: false,
+      reason: "這句是【錯誤】的！古代男子滿「二十歲」舉行加冠禮表示成年，所以「冠」的語譯是「二十歲」，不是三十歲。"
+    },
+    {
+      cat: "字詞語譯：《岳飛之少年時代》",
+      q: "「能挽弓三百斤」中的「挽」，標準語譯是「拉開」。",
+      ans: true,
+      reason: "這句是【正確】的！「挽弓」就是用手把弓箭拉開，所以「挽」的語譯是「拉開」。"
+    },
+
+    // --- 《楊修之死》課文內容題 (11-18) ---
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "《楊修之死》運用了「倒敍法」，先寫楊修因「雞肋」暗號被曹操斬殺的結局，之後再順序交代他恃才放曠、觸怒曹操的不同事件。",
+      ans: true,
+      reason: "這句是【正確】的！作者先寫被殺的結局，再順序交代楊修招來殺機的緣由，這正是「倒敍法」。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "《楊修之死》運用倒敍法的好處，是可以製造懸念，吸引讀者細看下去，並做到為讀者一一解開疑團的效果。",
+      ans: true,
+      reason: "這句是【正確】的！把結局放在開頭，能有效「製造懸念」、「吸引讀者」並「一一解開疑團」。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「雞肋事件」中，楊修從夜間口號「雞肋」猜中曹操想退兵，於是叫軍士收拾行裝，結果被曹操以「惑亂軍心」的罪名斬殺。",
+      ans: true,
+      reason: "這句是【正確】的！曹操大怒下以「惑亂軍心」罪名斬殺楊修，並把其頭顱掛於軍營門外。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「闊門事件」中，曹操在花園門上寫了一個「活」字，楊修猜中曹操是嫌花園的門「太窄」。",
+      ans: false,
+      reason: "這句是【錯誤】的！「門」字裡面加「活」字是「闊」字，所以楊修猜中曹操嫌門「太闊」（太寬），而不是太窄！"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「一合酥事件」中，楊修把「一合酥」拆解為「一人一口酥」與眾人分食，曹操見狀表面高興而笑，內心也很欣賞楊修。",
+      ans: false,
+      reason: "這句是【錯誤】的！根據課文，曹操雖然表面高興而笑，但內心其實「非常厭惡」楊修。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「夢中殺人」事件中，曹操害怕被人暗中謀害而假裝夢中殺人，卻被楊修識破詭計，曹操知道後愈來愈討厭楊修。",
+      ans: true,
+      reason: "這句是【正確】的！楊修看穿並說破曹操假睡殺人的心計，令曹操愈來愈討厭他。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「吳質事件」中，楊修向曹操告密指曹丕偷運吳質入內府，但曹丕用大簏裝著絲絹騙過使者，結果曹操懷疑楊修中傷曹丕，愈來愈厭惡他。",
+      ans: true,
+      reason: "這句是【正確】的！使者回報大簏裝的是絹，令曹操懷疑楊修故意中傷曹丕。"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「鄴門事件」中，楊修教曹植以斬殺阻擋者的方法通過鄴城門，曹操知道後大怒，並在此時正式起了殺楊修之心。",
+      ans: false,
+      reason: "這句是【錯誤】的！「鄴門事件」的結果是曹操大怒，「因此亦不喜歡曹植」；至於曹操正式「起了殺楊修之心」是在後來的「答教事件」！"
+    },
+    {
+      cat: "課文內容：《楊修之死》",
+      q: "在「答教事件」中，楊修為曹植作答教以應付曹操的提問，後來被曹丕揭發，曹操大怒，起了殺楊修之心。",
+      ans: true,
+      reason: "這句是【正確】的！答教事件被曹丕揭發後，曹操大怒，正式起了殺楊修之心。"
+    },
+
+    // --- 《歪兒》課文內容題 (20-24) ---
+    {
+      cat: "課文內容：《歪兒》",
+      q: "《歪兒》記述「踢罐電報」遊戲引起的風波，發生的時間是「某個暑假」，地點是「學校操場」。",
+      ans: false,
+      reason: "這句是【錯誤】的！時間的確是「某個暑假」，但地點是「街的中央」，並不是學校操場。"
+    },
+    {
+      cat: "課文內容：《歪兒》",
+      q: "《歪兒》中，當「歪兒坐莊」玩踢罐電報時，因為他跌跌撞撞的、樣子可笑，所以作者當時的情感是「開心／快樂」。",
+      ans: true,
+      reason: "這句是【正確】的！作者和同伴當時拿歪兒取樂，見他跌跌撞撞樣子可笑，所以感到「開心／快樂」。"
+    },
+    {
+      cat: "課文內容：《歪兒》",
+      q: "《歪兒》中，當歪兒被媽媽責罵、痛哭不止並被禁止再玩遊戲時，作者感到十分「生氣」。",
+      ans: false,
+      reason: "這句是【錯誤】的！當時作者感覺自己做了不好的事，所以心裡的情感是「不安」，而不是生氣。"
+    },
+    {
+      cat: "課文內容：《歪兒》",
+      q: "《歪兒》中，歪兒沒有惱恨作者和玩伴欺負他，反而無私地扔下長鐵罐給大家玩，這時作者心裡感到「內疚」。",
+      ans: true,
+      reason: "這句是【正確】的！歪兒無私獻出鐵罐讓大家玩得盡興，令作者為之前的欺負行為感到「內疚」。"
+    },
+    {
+      cat: "課文內容：《歪兒》",
+      q: "《歪兒》的結局是歪兒回到作者和同伴中間一起玩，遊戲時大家都暗中幫助他，作者感受到友誼的可貴，再次感到「開心／快樂」。",
+      ans: true,
+      reason: "這句是【正確】的！這時的「開心／快樂」是因為大家一同幫助歪兒，體會到友誼的可貴。"
+    },
+
+    // --- 《岳飛之少年時代》課文內容題 (25-28) ---
+    {
+      cat: "課文內容：《岳飛之少年時代》",
+      q: "《岳飛之少年時代》第 1 段記敍岳飛的表字、籍貫、名字的由來，以及初生時遇上「洪水」而大難不死的經歷。",
+      ans: true,
+      reason: "這句是【正確】的！第 1 段清楚交代了岳飛名字的由來，以及未彌月時遇上洪水卻大難不死的經歷。"
+    },
+    {
+      cat: "課文內容：《岳飛之少年時代》",
+      q: "《岳飛之少年時代》第 2 段透過岳飛記憶書傳內容能力很強、通宵達旦地讀書和努力學習周同的箭術，表達他少負氣節、天資非凡和「勤奮好學」的特點。",
+      ans: true,
+      reason: "這句是【正確】的！通宵達旦讀書和刻苦練箭，正好表現岳飛「勤奮好學」的特點。"
+    },
+    {
+      cat: "課文內容：《岳飛之少年時代》",
+      q: "《岳飛之少年時代》第 3 段記敍岳飛「不忘師恩」的美德，並通過母親與他的對話表達岳飛「以身報國」的志向。",
+      ans: false,
+      reason: "這句是【錯誤】的！第 3 段是通過「父親」（岳和）與他的對話來表達岳飛「以身報國」的志向，而不是母親！"
+    },
+    {
+      cat: "課文內容：《岳飛之少年時代》",
+      q: "《岳飛之少年時代》的主旨，是通過記敍岳飛少年時力學、敬師和述志的事跡，表現他刻苦學習的精神、尊師重道的態度和報效國家的志向。",
+      ans: true,
+      reason: "這句是【正確】的！「力學」對應刻苦學習、「敬師」對應尊師重道、「述志」對應報效國家的志向。"
+    }
+  ];
+
+  let activeQuizList = [];
+  let currentQuizIdx = 0;
+  let lastExplanationSpeech = "";
+
+  // 每次從 28 題大題庫中隨機洗牌抽取指定數量題目（預設 10 題或全部 28 題）
+  function startRandomQuizRound(count = 10, announce = true) {
+    const shuffled = [...masterQuizPool].sort(() => Math.random() - 0.5);
+    activeQuizList = shuffled.slice(0, Math.min(count, masterQuizPool.length));
+    currentQuizIdx = 0;
+    renderQuiz();
+    if (announce) {
+      speakText(`已經為你從題庫隨機抽出 ${activeQuizList.length} 道是非題，我哋開始啦！`);
+    }
+  }
+
+  function renderQuiz() {
+    const item = activeQuizList[currentQuizIdx];
+    document.getElementById('quiz-progress').innerText = `第 ${currentQuizIdx + 1} / ${activeQuizList.length} 題（總題庫 28 題）`;
+    document.getElementById('quiz-cat').innerText = `📘 ${item.cat}`;
+    document.getElementById('quiz-question').innerText = item.q;
+    document.getElementById('btn-true').disabled = false;
+    document.getElementById('btn-false').disabled = false;
+    const fb = document.getElementById('quiz-feedback');
+    fb.style.display = 'none';
+    document.getElementById('next-quiz-btn').style.display = 'none';
+    document.getElementById('speak-explain-btn').style.display = 'none';
+  }
+
+  function answerQuiz(userChoice) {
+    const item = activeQuizList[currentQuizIdx];
+    const isUserCorrect = (userChoice === item.ans);
+    const fb = document.getElementById('quiz-feedback');
+    fb.style.display = 'block';
+
+    document.getElementById('btn-true').disabled = true;
+    document.getElementById('btn-false').disabled = true;
+
+    const standardAnsText = item.ans ? "⭕ 正確" : "❌ 錯誤";
+    const userChoiceText = userChoice ? "⭕ 正確" : "❌ 錯誤";
+
+    if (isUserCorrect) {
+      fb.style.background = '#D8F3DC';
+      fb.style.border = '3px solid #40916C';
+      fb.style.color = '#1B4332';
+      fb.innerHTML = `
+        <div style="font-size:24px; font-weight:900; margin-bottom:8px;">🎉 答對了！（獲得 +1 ⭐）</div>
+        <div><b>你的選擇：</b>${userChoiceText}（與標準答案一致）</div>
+        <div style="margin-top:8px;"><b>💡 為什麼？</b>${item.reason}</div>
+      `;
+      addStar(1);
+      lastExplanationSpeech = `答啱喇，做得好！${item.reason}`;
+      speakText(lastExplanationSpeech);
+    } else {
+      fb.style.background = '#FFE5EC';
+      fb.style.border = '3px solid #FF4D6D';
+      fb.style.color = '#800F2F';
+      fb.innerHTML = `
+        <div style="font-size:24px; font-weight:900; margin-bottom:8px;">❌ 答錯了！不用灰心，看看原因吧：</div>
+        <div><b>你的選擇：</b>${userChoiceText} ｜ <b>本題標準答案：</b>${standardAnsText}</div>
+        <div style="margin-top:8px;"><b>💡 為什麼？</b>${item.reason}</div>
+      `;
+      lastExplanationSpeech = `唔緊要，我哋睇下原因啦。標準答案係${item.ans ? '正確' : '錯誤'}。${item.reason}`;
+      speakText(lastExplanationSpeech);
+    }
+
+    document.getElementById('next-quiz-btn').style.display = 'inline-flex';
+    document.getElementById('speak-explain-btn').style.display = 'inline-flex';
+  }
+
+  function speakQuizExplanation() {
+    speakText(lastExplanationSpeech);
+  }
+
+  function nextQuiz() {
+    if (currentQuizIdx + 1 >= activeQuizList.length) {
+      speakText("恭喜你完成呢一輪是非題！系統幫你隨機抽取新一輪題目啦！");
+      startRandomQuizRound(activeQuizList.length, false);
+    } else {
+      currentQuizIdx++;
+      renderQuiz();
+    }
+  }
+
+  function speakQuiz() {
+    speakText(activeQuizList[currentQuizIdx].q);
+  }
+
+  // ==================== 3. 配對連線邏輯（10個詞語＋隨機刷新＋粵語朗讀） ====================
+  const matchThemes = [
+    {
+      title: "📌 當前主題：主題一（全部 10 個必考字詞語譯）",
+      pairs: [
+        { left: "不日", right: "未來數天之內" },
+        { left: "班師", right: "調回出征軍隊" },
+        { left: "放曠", right: "放恣／不守法度" },
+        { left: "數", right: "屢次" },
+        { left: "肺腑", right: "心思" },
+        { left: "彌月", right: "出生滿一月" },
+        { left: "及", right: "到達" },
+        { left: "好", right: "愛好" },
+        { left: "冠", right: "二十歲" },
+        { left: "挽", right: "拉開" }
+      ]
+    },
+    {
+      title: "📌 當前主題：主題二（《楊修之死》7 個事件經過與結果）",
+      pairs: [
+        { left: "雞肋事件（猜中退兵收拾行裝）", right: "以「惑亂軍心」斬殺楊修" },
+        { left: "闊門事件（門上寫「活」字嫌門闊）", right: "表面稱讚，心裡很妒忌他" },
+        { left: "一合酥事件（拆解一人一口酥分食）", right: "表面高興而笑，內心非常厭惡" },
+        { left: "夢中殺人（識破曹操假睡殺人詭計）", right: "曹操知道後，愈來愈討厭楊修" },
+        { left: "吳質事件（曹丕以大簏載絹惑騙使者）", right: "懷疑楊修中傷曹丕，愈來愈厭惡" },
+        { left: "鄴門事件（教曹植斬殺阻擋者出城）", right: "曹操大怒，因此亦不喜歡曹植" },
+        { left: "答教事件（為曹植作答教被曹丕揭發）", right: "曹操大怒，起了殺楊修之心" }
+      ]
+    },
+    {
+      title: "📌 當前主題：主題三（《歪兒》記敍六要素與作者情感變化）",
+      pairs: [
+        { left: "「踢罐電報」風波發生的時間與地點", right: "某個暑假、街的中央" },
+        { left: "事件起因（欺負歪兒，拿他取樂）", right: "歪兒坐莊跌跌撞撞，作者感「開心」" },
+        { left: "歪兒痛哭不止，媽媽不許他再玩", right: "作者感「不安」（覺自己做了不好的事）" },
+        { left: "歪兒不記仇，無私扔下長鐵罐給大家", right: "作者感「內疚」，立即叫他一起玩" },
+        { left: "事件結果（歪兒回到同伴中間同玩）", right: "大家暗中幫歪兒，感「開心」（友誼可貴）" }
+      ]
+    }
+  ];
+
+  let currentMatchThemeIdx = 0;
+  let selectedLeft = null;
+  let selectedRight = null;
+  let matchedPairs = [];
+
+  function loadMatchGame(themeIdx) {
+    currentMatchThemeIdx = themeIdx;
+    selectedLeft = null;
+    selectedRight = null;
+    matchedPairs = [];
+
+    const themeObj = matchThemes[themeIdx];
+    document.getElementById('match-theme-label').innerText = themeObj.title;
+
+    const pairs = themeObj.pairs;
+    const leftContainer = document.getElementById('match-left');
+    const rightContainer = document.getElementById('match-right');
+    leftContainer.innerHTML = '';
+    rightContainer.innerHTML = '';
+    document.getElementById('match-svg').innerHTML = '';
+
+    const leftShuffled = pairs.map((p, idx) => ({ text: p.left, id: idx })).sort(() => Math.random() - 0.5);
+    const rightShuffled = pairs.map((p, idx) => ({ text: p.right, id: idx })).sort(() => Math.random() - 0.5);
+
+    leftShuffled.forEach(item => {
+      const lDiv = createMatchCard('left', item.text, item.id);
+      leftContainer.appendChild(lDiv);
+    });
+
+    rightShuffled.forEach(item => {
+      const rDiv = createMatchCard('right', item.text, item.id);
+      rightContainer.appendChild(rDiv);
+    });
+  }
+
+  function createMatchCard(side, text, id) {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.dataset.id = id;
+
+    const span = document.createElement('span');
+    span.className = 'match-item-text';
+    span.innerText = text;
+
+    const audioBtn = document.createElement('button');
+    audioBtn.className = 'mini-audio-btn';
+    audioBtn.innerText = '🔊';
+    audioBtn.title = '粵語朗讀';
+    audioBtn.onclick = (e) => {
+      e.stopPropagation();
+      speakText(text);
+    };
+
+    div.appendChild(span);
+    div.appendChild(audioBtn);
+
+    div.onclick = () => selectMatchItem(side, div, id, text);
+    return div;
+  }
+
+  function refreshCurrentMatch() {
+    loadMatchGame(currentMatchThemeIdx);
+    speakText("題目順序已經隨機刷新啦！");
+  }
+
+  function speakAllMatchPairs() {
+    const pairs = matchThemes[currentMatchThemeIdx].pairs;
+    const textToSpeak = pairs.map(p => `${p.left}，對應，${p.right}`).join('。 ');
+    speakText(textToSpeak);
+  }
+
+  function selectMatchItem(side, el, id, text) {
+    if (el.classList.contains('matched')) return;
+    speakText(text);
+
+    if (side === 'left') {
+      document.querySelectorAll('#match-left .match-item').forEach(i => i.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedLeft = { el, id };
+    } else {
+      document.querySelectorAll('#match-right .match-item').forEach(i => i.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedRight = { el, id };
+    }
+
+    if (selectedLeft && selectedRight) {
+      if (selectedLeft.id === selectedRight.id) {
+        selectedLeft.el.classList.remove('selected');
+        selectedRight.el.classList.remove('selected');
+        selectedLeft.el.classList.add('matched');
+        selectedRight.el.classList.add('matched');
+        matchedPairs.push({ leftEl: selectedLeft.el, rightEl: selectedRight.el });
+        drawMatchedLines();
+        addStar(1);
+        selectedLeft = null;
+        selectedRight = null;
+      } else {
+        const lEl = selectedLeft.el;
+        const rEl = selectedRight.el;
+        lEl.classList.add('wrong');
+        rEl.classList.add('wrong');
+        setTimeout(() => {
+          lEl.classList.remove('wrong', 'selected');
+          rEl.classList.remove('wrong', 'selected');
+        }, 450);
+        selectedLeft = null;
+        selectedRight = null;
+      }
+    }
+  }
+
+  function drawMatchedLines() {
+    const svg = document.getElementById('match-svg');
+    const boardRect = document.getElementById('match-board').getBoundingClientRect();
+    svg.innerHTML = '';
+    matchedPairs.forEach(pair => {
+      const lRect = pair.leftEl.getBoundingClientRect();
+      const rRect = pair.rightEl.getBoundingClientRect();
+      const x1 = lRect.right - boardRect.left;
+      const y1 = lRect.top + lRect.height / 2 - boardRect.top;
+      const x2 = rRect.left - boardRect.left;
+      const y2 = rRect.top + rRect.height / 2 - boardRect.top;
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+      line.setAttribute('stroke', '#06D6A0');
+      line.setAttribute('stroke-width', '5');
+      line.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(line);
+    });
+  }
+
+  window.addEventListener('resize', drawMatchedLines);
+
+  // ==================== 4. 《岳飛之少年時代》段意與主旨邏輯 ====================
+  const yuefeiWords = [
+    "名字的由來",
+    "洪水",
+    "大難不死",
+    "記憶書傳內容",
+    "通宵達旦地讀書",
+    "勤奮好學",
+    "不忘師恩",
+    "以身報國",
+    "刻苦學習的精神",
+    "尊師重道的態度",
+    "報效國家的志向"
+  ];
+
+  let activeBlankSlot = null;
+
+  function initYuefeiSection() {
+    resetYuefei(true);
+  }
+
+  function resetYuefei(initial = false) {
+    activeBlankSlot = null;
+    const bankContainer = document.getElementById('yuefei-bank');
+    bankContainer.innerHTML = '';
+
+    const shuffled = [...yuefeiWords].sort(() => Math.random() - 0.5);
+    shuffled.forEach(word => {
+      const chip = document.createElement('button');
+      chip.className = 'bank-chip';
+      chip.innerText = word;
+      chip.dataset.word = word;
+      chip.onclick = () => onBankChipClick(chip, word);
+      bankContainer.appendChild(chip);
+    });
+
+    const slots = document.querySelectorAll('.blank-slot');
+    slots.forEach((slot, idx) => {
+      slot.className = 'blank-slot';
+      slot.innerText = '（點擊選擇）';
+      if (idx === 0) {
+        slot.classList.add('active-slot');
+        activeBlankSlot = slot;
+      }
+    });
+
+    if (!initial) {
+      speakText("《岳飛之少年時代》填充練習已經重置，請點擊詞語卡填入空格啦！");
+    }
+  }
+
+  function selectSlot(slotEl) {
+    if (slotEl.classList.contains('correct')) {
+      speakText(slotEl.dataset.ans);
+      return;
+    }
+    document.querySelectorAll('.blank-slot').forEach(s => s.classList.remove('active-slot'));
+    slotEl.classList.add('active-slot');
+    activeBlankSlot = slotEl;
+  }
+
+  function onBankChipClick(chipEl, word) {
+    if (chipEl.classList.contains('used')) return;
+    speakText(word);
+
+    if (!activeBlankSlot) {
+      const nextEmpty = document.querySelector('.blank-slot:not(.correct)');
+      if (!nextEmpty) return;
+      activeBlankSlot = nextEmpty;
+    }
+
+    const expectedAns = activeBlankSlot.dataset.ans;
+    if (word === expectedAns) {
+      activeBlankSlot.innerText = word;
+      activeBlankSlot.classList.remove('active-slot', 'wrong');
+      activeBlankSlot.classList.add('correct');
+      chipEl.classList.add('used');
+      addStar(1);
+
+      const nextEmpty = document.querySelector('.blank-slot:not(.correct)');
+      if (nextEmpty) {
+        nextEmpty.classList.add('active-slot');
+        activeBlankSlot = nextEmpty;
+      } else {
+        activeBlankSlot = null;
+        speakText("太棒了！你已經完成《岳飛之少年時代》全部段意同埋主旨啦！");
+      }
+    } else {
+      activeBlankSlot.classList.add('wrong');
+      setTimeout(() => {
+        if (activeBlankSlot) activeBlankSlot.classList.remove('wrong');
+      }, 450);
+    }
+  }
+
+  function showAllYuefeiAnswers() {
+    document.querySelectorAll('.blank-slot').forEach(slot => {
+      slot.innerText = slot.dataset.ans;
+      slot.classList.remove('active-slot', 'wrong');
+      slot.classList.add('correct');
+    });
+    document.querySelectorAll('.bank-chip').forEach(chip => {
+      chip.classList.add('used');
+    });
+    activeBlankSlot = null;
+    speakText("已經顯示全部標準答案啦！");
+  }
+
+  function speakYuefeiPara(paraNum) {
+    const texts = {
+      1: "第一段段意，記敍岳飛的表字和籍貫、名字的由來，以及初生時遇上洪水，而大難不死的經歷。",
+      2: "第二段段意，以岳飛記憶書傳內容的能力很強、通宵達旦地讀書，和努力學習周同的箭術，表達他少負氣節、天資非凡，和勤奮好學的特點。",
+      3: "第三段段意，記敍岳飛不忘師恩的美德，並通過父親與他的對話，表達岳飛以身報國的志向。",
+      4: "主旨，本文通過記敍岳飛少年時力學、敬師和述志的事跡，表現岳飛刻苦學習的精神、尊師重道的態度，和報效國家的志向。"
+    };
+    speakText(texts[paraNum]);
+  }
+
+  function speakYuefeiAll() {
+    speakText(
+      "《岳飛之少年時代》。第一段，記敍岳飛的表字和籍貫、名字的由來，以及初生時遇上洪水而大難不死的經歷。" +
+      "第二段，以岳飛記憶書傳內容的能力很強、通宵達旦地讀書和努力學習周同的箭術，表達他少負氣節、天資非凡和勤奮好學的特點。" +
+      "第三段，記敍岳飛不忘師恩的美德，並通過父親與他的對話表達岳飛以身報國的志向。" +
+      "主旨，本文通過記敍岳飛少年時力學、敬師和述志的事跡，表現岳飛刻苦學習的精神、尊師重道的態度和報效國家的志向。"
+    );
+  }
+
+  // ==================== 5. 描紅與畫板邏輯（細畫筆＋大字體語譯＋10詞與語譯分別獨立粵語發音） ====================
+  const traceWords = [
+    { word: "不日", meaning: "未來數天之內", lesson: "《楊修之死》" },
+    { word: "班師", meaning: "調回出征軍隊", lesson: "《楊修之死》" },
+    { word: "放曠", meaning: "放恣／不守法度", lesson: "《楊修之死》" },
+    { word: "數", meaning: "屢次", lesson: "《楊修之死》" },
+    { word: "肺腑", meaning: "心思", lesson: "《楊修之死》" },
+    { word: "彌月", meaning: "出生滿一月", lesson: "《岳飛之少年時代》" },
+    { word: "及", meaning: "到達", lesson: "《岳飛之少年時代》" },
+    { word: "好", meaning: "愛好", lesson: "《岳飛之少年時代》" },
+    { word: "冠", meaning: "二十歲", lesson: "《岳飛之少年時代》" },
+    { word: "挽", meaning: "拉開", lesson: "《岳飛之少年時代》" }
+  ];
+
+  let currentTraceIdx = 0;
+  let traceContentMode = 'meaning'; // 預設可直接練習「考試語譯答案」或隨時切換「文言字詞」
+  let showTemplate = true;
+  let penColor = '#D90429';
+  let penLineWidth = 4; // 調細畫筆（4px），描紅清晰不遮擋筆劃
+  let isDrawing = false;
+  let canvas, ctx;
+
+  function renderTraceSelector() {
+    const container = document.getElementById('word-selector');
+    container.innerHTML = '';
+    traceWords.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'trace-card-item' + (idx === currentTraceIdx ? ' active' : '');
+
+      const titleSpan = document.createElement('div');
+      titleSpan.className = 'trace-card-title';
+      titleSpan.innerHTML = `${idx + 1}. <span style="color:#D90429;">${item.word}</span>：<span style="color:#2B6CB0;">${item.meaning}</span>`;
+
+      const audioBox = document.createElement('div');
+      audioBox.className = 'trace-card-audios';
+
+      // 獨立按鈕 1：朗讀「文言字詞」並切換到字詞描紅
+      const btnWordAudio = document.createElement('button');
+      btnWordAudio.className = 'trace-voice-pill';
+      btnWordAudio.innerText = '🔊字詞';
+      btnWordAudio.title = `聽「${item.word}」發音並描寫`;
+      btnWordAudio.onclick = (e) => {
+        e.stopPropagation();
+        currentTraceIdx = idx;
+        traceContentMode = 'word';
+        renderTraceSelector();
+        drawBackgroundTemplate();
+        speakText(item.word);
+      };
+
+      // 獨立按鈕 2：朗讀「考試語譯」並切換到語譯描紅
+      const btnMeaningAudio = document.createElement('button');
+      btnMeaningAudio.className = 'trace-voice-pill meaning-pill';
+      btnMeaningAudio.innerText = '🔊語譯';
+      btnMeaningAudio.title = `聽「${item.meaning}」發音並描寫`;
+      btnMeaningAudio.onclick = (e) => {
+        e.stopPropagation();
+        currentTraceIdx = idx;
+        traceContentMode = 'meaning';
+        renderTraceSelector();
+        drawBackgroundTemplate();
+        speakText(item.meaning);
+      };
+
+      audioBox.appendChild(btnWordAudio);
+      audioBox.appendChild(btnMeaningAudio);
+
+      card.appendChild(titleSpan);
+      card.appendChild(audioBox);
+
+      card.onclick = () => {
+        currentTraceIdx = idx;
+        renderTraceSelector();
+        clearCanvas();
+        speakTraceWord();
+      };
+
+      container.appendChild(card);
+    });
+  }
+
+  function setTraceContentMode(mode) {
+    traceContentMode = mode;
+    showTemplate = true;
+    drawBackgroundTemplate();
+    if (mode === 'word') {
+      speakCurrentTraceWordOnly();
+    } else {
+      speakCurrentTraceMeaningOnly();
+    }
+  }
+
+  function initCanvas() {
+    canvas = document.getElementById('trace-canvas');
+    ctx = canvas.getContext('2d');
+    drawBackgroundTemplate();
+
+    canvas.onmousedown = startDraw;
+    canvas.onmousemove = drawMove;
+    window.onmouseup = endDraw;
+
+    canvas.ontouchstart = (e) => { e.preventDefault(); startDraw(e.touches[0]); };
+    canvas.ontouchmove = (e) => { e.preventDefault(); drawMove(e.touches[0]); };
+    canvas.ontouchend = endDraw;
+  }
+
+  function drawBackgroundTemplate() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 畫柔和輔助米字／九宮格線
+    ctx.strokeStyle = '#EDF2F7';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height / 2);
+    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width / 2, canvas.height);
+    ctx.stroke();
+
+    const item = traceWords[currentTraceIdx];
+    document.getElementById('trace-info').innerHTML =
+      `📌 ${item.lesson} 【<span style="color:#D90429;">${item.word}</span> ： <span style="color:#2B6CB0;">${item.meaning}</span>】`;
+
+    if (showTemplate) {
+      const textToDraw = (traceContentMode === 'word') ? item.word : item.meaning;
+      // 大幅調大「描寫考試語譯答案」及「文言字詞」的底字字體，填滿 880px 寬畫布
+      let fontSize = 185;
+      if (textToDraw.length >= 7) {
+        fontSize = 108; // 如「放恣／不守法度」(7字)
+      } else if (textToDraw.length === 6) {
+        fontSize = 126; // 如「未來數天之內」、「調回出征軍隊」(6字)
+      } else if (textToDraw.length === 5) {
+        fontSize = 148; // 如「出生滿一月」(5字)
+      } else if (textToDraw.length >= 3) {
+        fontSize = 165; // 如「二十歲」(3字)
+      } else {
+        fontSize = 195; // 1-2字（如「屢次」、「心思」、「到達」、「不日」等）
+      }
+
+      ctx.font = `bold ${fontSize}px "KaiTi", "STKaiti", "BiauKai", "PingFang HK", "Microsoft JhengHei", sans-serif`;
+      ctx.fillStyle = '#CBD5E0'; // 柔和清晰淺灰底字，配合幼紅筆極易看清筆劃
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(textToDraw, canvas.width / 2, canvas.height / 2 + 6);
+    }
+  }
+
+  function getPos(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+      x: (evt.clientX - rect.left) * scaleX,
+      y: (evt.clientY - rect.top) * scaleY
+    };
+  }
+
+  function startDraw(evt) {
+    isDrawing = true;
+    const pos = getPos(evt);
+    ctx.beginPath();
+    ctx.moveTo(pos.x, pos.y);
+  }
+
+  function drawMove(evt) {
+    if (!isDrawing) return;
+    const pos = getPos(evt);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.strokeStyle = penColor;
+    ctx.lineWidth = penLineWidth; // 預設 4px 幼筆，清晰描繪筆劃
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+  }
+
+  function endDraw() {
+    isDrawing = false;
+  }
+
+  function setPenColor(color, el) {
+    penColor = color;
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function setPenSize(size, el) {
+    penLineWidth = size;
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function toggleTraceTemplate() {
+    showTemplate = !showTemplate;
+    drawBackgroundTemplate();
+  }
+
+  function clearCanvas() {
+    drawBackgroundTemplate();
+  }
+
+  function completeTrace() {
+    addStar(1);
+    const item = traceWords[currentTraceIdx];
+    speakText(`寫得好靚呀！${item.word}，意思係，${item.meaning}。獎勵你一粒星！`);
+    clearCanvas();
+  }
+
+  function speakCurrentTraceWordOnly() {
+    const item = traceWords[currentTraceIdx];
+    speakText(item.word);
+  }
+
+  function speakCurrentTraceMeaningOnly() {
+    const item = traceWords[currentTraceIdx];
+    speakText(item.meaning);
+  }
+
+  function speakTraceWord() {
+    const item = traceWords[currentTraceIdx];
+    speakText(`${item.word}，考試語譯係，${item.meaning}。`);
+  }
+
+  // 初始化載入
+  window.onload = () => {
+    preferredCantoneseVoice = selectSoftCantoneseFemaleVoice();
+    renderFlashcard();
+    startRandomQuizRound(10, false);
+    loadMatchGame(0);
+    initYuefeiSection();
+    renderTraceSelector();
+    initCanvas();
+  };
+</script>
+</body>
+</html>
